@@ -1,4 +1,4 @@
-pragma solidity ^0.4.4;
+pragma solidity >0.4.99 <0.6.0;
 
 contract SelfDestruct {
 
@@ -14,12 +14,12 @@ contract SelfDestruct {
     }
 
     // Constructor
-    function SelfDestruct() public {
+    constructor() public {
         owner = msg.sender;
     }
 
     // Sets the storage variable
-    function  setValue(string value) public {
+    function  setValue(string memory value) public {
         someValue = value;
     }
 

@@ -1,4 +1,4 @@
-pragma solidity ^0.4.4;
+pragma solidity >0.4.99 <0.6.0;
 
 /**
  * A Contract can create other contracts.
@@ -16,7 +16,7 @@ contract  ChildContract {
     event     ChildOwnerTransfered(uint8 identity, bytes32 from, bytes32 to);
 
     // Constructor
-    function  ChildContract(uint8 id, address own, bytes32 nm) public {
+    constructor(uint8 id, address own, bytes32 nm) public {
       identity = id;
       owner = own;
       name = nm;
@@ -46,7 +46,7 @@ contract ContractFactory {
 
     // Constructor
     // Creates the child contracts
-    function ContractFactory(uint8  numParts, uint8   price) public {
+    constructor(uint8  numParts, uint8   price) public {
         for(uint8 i = 0; i < numParts; i++){
             children.push(new ChildContract(i, this, "***"));
         }
@@ -74,7 +74,7 @@ contract ContractFactory {
 
 
     // Returns the information about the child contract at specified index
-    function  getInfo(uint8 childIndex) public constant returns(uint8, address, bytes32){
+    function  getInfo(uint8 childIndex) public view returns(uint8, address, bytes32){
         // Simply return the values
         return (children[childIndex].identity(),children[childIndex].owner(),children[childIndex].name());
     }
@@ -85,12 +85,12 @@ contract ContractFactory {
     }
 
     // Returns name of the owner based on the child index
-    function  getOwnerName(uint8 childIndex) public constant returns(bytes32){
+    function  getOwnerName(uint8 childIndex) public view returns(bytes32){
         bytes32  namer = children[childIndex].name();
         return namer;
     }
     // Returns the count of the children
-    function  getChildrenCount() public constant returns (uint){
+    function  getChildrenCount() public view returns (uint){
         return children.length;
     }
   

@@ -1,4 +1,4 @@
-pragma solidity ^0.4.4;
+pragma solidity >0.4.99 <0.6.0;
 
 /**
  * Creates a registry for contracts
@@ -36,7 +36,7 @@ contract NameRegistry {
     }
 
     // Contracts having a dependency on this contract will invoke this function
-    function  getContractInfo(bytes32 name) public constant returns(address,uint16){
+    function  getContractInfo(bytes32 name) public view returns(address,uint16){
         return (nameInfo[name].contractInst, nameInfo[name].version);
     }
 

@@ -1,4 +1,4 @@
-pragma solidity ^0.4.4;
+pragma solidity >0.4.99 <0.6.0;
 
 /**
  * Implements the registry for address => name mapping
@@ -30,7 +30,7 @@ contract UserAddressRegistry {
         else revert();
     }
 
-    function UserAddressRegistry() public {
+    constructor() public {
         owner = msg.sender;
     }
 
@@ -71,20 +71,20 @@ contract UserAddressRegistry {
 
 
     // Returns the count of registered names
-    function  count() public constant returns (uint){
+    function  count() public view returns (uint){
         return addresses.length;
     }
 
   
     // Returns the address-name at the specified index
-    function  getByIndex(uint index) public constant returns (address, bytes32,uint){
+    function  getByIndex(uint index) public view returns (address, bytes32,uint){
         if(index >= addresses.length) return;
         address addr = addresses[index];
         return (addr, addressMap[addr].name, addressMap[addr].lastUpdated);
     }
 
     // Returns the address-name by way of the address
-    function  getByAddress(address addr) public constant returns (address,bytes32,uint){
+    function  getByAddress(address addr) public view returns (address,bytes32,uint){
         return (addr, addressMap[addr].name, addressMap[addr].lastUpdated);
     }
 
